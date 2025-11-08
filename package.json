@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"generate-json": "ts-node scripts/xlsx-to-json.ts",
+		"generate-json": "npx ts-node scripts/xlsx-to-json.ts",
 		"dev": "vite dev",
 		"build": "npm run generate-json && vite build",
 		"preview": "vite preview",
