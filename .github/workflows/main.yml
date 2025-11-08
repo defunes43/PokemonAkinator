@@ -17,7 +17,7 @@ jobs:
       - name: Install and Build 
         run: |
           npm ci
-          npx tsc scripts/xlsx-to-json.ts --esModuleInterop --module commonjs --outDir ./dist_scripts --lib es2020
+          npx tsc scripts/xlsx-to-json.ts --esModuleInterop --module NodeNext --outDir ./dist_scripts --lib es2020
           node dist_scripts/xlsx-to-json.js
           npm run build
 
