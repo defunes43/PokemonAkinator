@@ -12,12 +12,13 @@ jobs:
 
       - name: JSON generation
         run: |
-          npx tsc scripts/xlsx-to-json.ts --esModuleInterop --module commonjs --outDir ./dist_scripts
-          node dist_scripts/xlsx-to-json.js
+
 
       - name: Install and Build 
         run: |
           npm ci
+          npx tsc scripts/xlsx-to-json.ts --esModuleInterop --module commonjs --outDir ./dist_scripts --lib es2020
+          node dist_scripts/xlsx-to-json.js
           npm run build
 
       - name: Deploy 🚀
