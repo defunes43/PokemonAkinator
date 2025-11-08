@@ -18,6 +18,7 @@
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.38.0",
 		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.47.1",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@types/fs-extra": "^11.0.4",
@@ -38,6 +39,11 @@
 		"xlsx": "^0.18.5"
 	},
 	"dependencies": {
+		"@capacitor-community/text-to-speech": "^6.1.0",
+		"@capacitor/android": "^7.4.4",
+		"@capacitor/app": "^7.1.0",
+		"@capacitor/cli": "^7.4.4",
+		"@capacitor/core": "^7.4.4",
 		"knopf.css": "^1.1.2"
 	}
 }

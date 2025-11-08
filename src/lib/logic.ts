@@ -1,3 +1,5 @@
+import { TextToSpeech } from '@capacitor-community/text-to-speech'; 
+
 export type Answer = 'yes' | 'no' | 'unknown';
 
 export interface Pokemon {
@@ -48,8 +50,14 @@ export function bestQuestionRandomized(pokemons: Pokemon[], questions: Question[
   return top[Math.floor(Math.random() * top.length)].question;
 }
 
-export function speak(text: string) {
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "fr-FR";
-  speechSynthesis.speak(utter);
+export async function speak(text: string) {
+    
+  const correctedText = text.replace(/Pokémon/g, 'Poquémmone').replace(/pokémon/g, 'Poquémmone');
+
+   await TextToSpeech.speak({
+            text: correctedText,
+            lang: 'fr-FR',
+            rate: 1.0,
+            volume: 1.0
+        });
 }

@@ -1,23 +1,49 @@
-node_modules
+# ----------------------------------------
+# 1. Dépendances & Paquets (npm)
+# ----------------------------------------
+/node_modules
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
 
-# Output
-.output
-.vercel
-.netlify
-.wrangler
+# ----------------------------------------
+# 2. Dossiers de Compilation (SvelteKit)
+# ----------------------------------------
+# Fichiers de build générés par 'npm run build'
 /.svelte-kit
 /build
 
-# OS
-.DS_Store
-Thumbs.db
+# Cache de développement de Vite
+.vite/
+.eslintcache
 
-# Env
+# ----------------------------------------
+# 3. Plateformes Natives (Capacitor)
+# ----------------------------------------
+# Les dossiers 'android' et 'ios' sont régénérés et/ou contiennent des fichiers volumineux
+# qui dépendent de la machine locale et ne doivent PAS être versionnés.
+/android
+/ios
+
+# ----------------------------------------
+# 4. Fichiers de Configuration Locaux
+# ----------------------------------------
+# Fichiers de cache et IDE (VS Code, WebStorm, etc.)
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.vscode
+.idea
+.editorconfig
+
+# Fichiers de log et de test
+npm-debug.log*
+yarn-debug.log*
+test-results.xml
+
+# ----------------------------------------
+# 5. Secrets et Variables d'Environnement
+# ----------------------------------------
+# Ne jamais versionner les fichiers contenant des clés API, tokens, ou mots de passe.
 .env
 .env.*
-!.env.example
-!.env.test
-
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
