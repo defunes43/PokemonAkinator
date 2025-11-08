@@ -10,6 +10,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
 
+      - name: JSON generation
+        run: |
+          npx tsc scripts/xlsx-to-json.ts --esModuleInterop --module commonjs --outDir ./dist_scripts
+          node dist_scripts/xlsx-to-json.js
+
       - name: Install and Build 
         run: |
           npm ci
