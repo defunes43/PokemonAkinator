@@ -8,12 +8,12 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
+			  paths:{
+		base: process.env.PUBLIC_BASE_PATH
+	  },
 		adapter: adapter({
       // Toutes les pages sont pré-rendues
-      fallback: 'index.html', // Important pour une SPA
-	  paths:{
-		base: process.env.PUBLIC_BASE_PATH
-	  }
+      fallback: 'index.html' // Important pour une SPA
     })
 	}
 };
