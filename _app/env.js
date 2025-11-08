@@ -1,1 +1,1 @@
-export const env={"PUBLIC_BASE_PATH":"/PokemonAkinator"}
+export const env={"PUBLIC_BASE_PATH":"/"}
