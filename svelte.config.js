@@ -10,7 +10,10 @@ const config = {
 	kit: {
 		adapter: adapter({
       // Toutes les pages sont pré-rendues
-      fallback: 'index.html' // Important pour une SPA
+      fallback: 'index.html', // Important pour une SPA
+	  paths:{
+		base: process.env.PUBLIC_BASE_PATH
+	  }
     })
 	}
 };
