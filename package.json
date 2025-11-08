@@ -6,8 +6,8 @@
 	"scripts": {
 		"generate-json": "npx ts-node --esm scripts/xlsx-to-json.ts",
 		"dev": "vite dev",
-		"build": "vite build",
-		"build:capacitor": "CAPACITOR_BUILD=true svelte-kit build",
+		"build": "cross-env VITE_BASE_URL=/PokemonAkinator PUBLIC_BASE_PATH=/PokemonAkinator vite build",
+		"build:capacitor": "cross-env VITE_BASE_URL=/ PUBLIC_BASE_PATH=/ vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -24,6 +24,7 @@
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@types/fs-extra": "^11.0.4",
 		"@types/node": "^24.10.0",
+		"cross-env": "^10.1.0",
 		"eslint": "^9.38.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.12.4",
