@@ -6,6 +6,12 @@ import { bestQuestionRandomized, speak} from '$lib/logic';
 import type { AskedQuestion, Pokemon, Question } from '$lib/logic';
 import 'knopf.css';
 
+  import { collection } from '$lib/stores/collection';
+  import { fly } from 'svelte/transition';
+  import { tick } from 'svelte';
+
+  let showPokeball = false;
+
 let pokemonsRestants: Pokemon[] = [];
 let askedQuestions: AskedQuestion[] = [];
 let availableQuestions: Question[] = [];
@@ -61,10 +67,18 @@ function cancelAnswer(question: AskedQuestion){
   nextQuestion();
 }
 
-function nextQuestion() {
+async function nextQuestion() {
   if (pokemonsRestants.length === 1) {
+
+    showPokeball = true;
     result = `Je pense que ton Pokémon est ${pokemonsRestants[0].name} !`;
     currentQuestion = null;
+
+    collection.add(pokemonsRestants[0].name);
+    
+    await tick();
+    setTimeout(() => (showPokeball = false), 1500);
+
     speak(result);
     return;
   }
@@ -148,6 +162,13 @@ function nextQuestion() {
       </ul>
     </section>
   </div>
+
+  {#if showPokeball}
+  <div class="pokeball-animation" transition:fly={{ y: 200, duration: 1200 }}>
+    <img src="/pokeball.png" alt="Pokéball" />
+  </div>
+{/if}
+
 </main>
 
 <style>
@@ -332,4 +353,25 @@ function nextQuestion() {
     border: 2px solid var(--p-color, #ccc);
     object-fit: contain;
   }
+
+  .pokeball-animation {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  animation: bounce 1.2s ease-in-out;
+}
+
+.pokeball-animation img {
+  width: 80px;
+  height: 80px;
+}
+
+@keyframes bounce {
+  0% { transform: translate(-50%, -400px); }
+  50% { transform: translate(-50%, 0); }
+  70% { transform: translate(-50%, -30px); }
+  100% { transform: translate(-50%, 0); }
+}
 </style>

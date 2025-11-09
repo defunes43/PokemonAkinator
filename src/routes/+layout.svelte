@@ -1,6 +1,7 @@
 <script lang="ts">
     import favicon from '$lib/assets/favicon.svg';
     let { children } = $props();
+    import {page} from '$app/stores';
 </script>
 
 <svelte:head>
@@ -83,3 +84,8 @@
 </style>
 
 {@render children()}
+
+<nav class="bottom-nav">
+    <a href="/" class:selected={$page.url.pathname === '/'}>🎮 Jeu</a>
+    <a href="/collection" class:selected={$page.url.pathname.startsWith('/collection')}>📘 Collection</a>
+</nav>
