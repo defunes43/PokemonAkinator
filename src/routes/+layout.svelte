@@ -9,20 +9,34 @@ const navItems = $derived([
 href: '/', 
 label: 'Accueil', 
 icon: "<i class='fa-solid fa-house'></i>",
- match: (path: string, base: string) => path === base
  },
  { 
 href: '/collection', 
 label: 'Collection', 
  icon: "<i class='fa-solid fa-folder'></i>",
-match: (path: string, base: string) => path.startsWith(`${base}/collection`)
  }
 ]);
 
 
-const basePath = typeof window !== 'undefined' ? (window as any).PUBLIC_BASE_PATH || '' : '';
+const basePath = $derived(base);
 
-const currentPath = $derived($page.url.pathname.replace(basePath, ''));
+    const currentPath = $derived($page.url.pathname);
+
+     const getIsActive = (path: string) => {
+
+        const targetPath = (path === '/') ? basePath : `${basePath}${path}`;
+        
+
+        if (currentPath === targetPath) {
+            return true;
+        }
+
+        if (path !== '/' && currentPath.startsWith(targetPath)) {
+            return true;
+        }
+
+        return false;
+    };
 </script>
 
 <svelte:head>
@@ -157,20 +171,18 @@ const currentPath = $derived($page.url.pathname.replace(basePath, ''));
 {@render children()}
 
 <nav class="bottom-nav">
- {#each navItems as item}
-
- {@const href = item.href === '/' ? basePath : `${basePath}${item.href}`}
-
-{@const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))}
- 
-<a 
- {href} 
-class="nav-item"
-class:active={isActive}
->
-
-<span class="nav-icon">{@html item.icon}</span>
-<span class="nav-label">{item.label}</span>
- </a>
-{/each}
+    {#each navItems as item}
+        <!-- Construction du chemin complet : SvelteKit gère l'ajout du "base" si on part d'une racine (/) -->
+        {@const href = (item.href === '/') ? basePath : `${basePath}${item.href}`}
+        
+        <a 
+            {href} 
+            class="nav-item"
+            class:active={getIsActive(item.href)}
+        >
+            <!-- Utilisation de {@html ...} pour rendre l'icône comme du HTML -->
+            <span class="nav-icon">{@html item.icon}</span>
+            <span class="nav-label">{item.label}</span>
+        </a>
+    {/each}
 </nav>
