@@ -5,6 +5,9 @@
   import { get } from 'svelte/store';
   import type { Pokemon } from '$lib/logic';
 
+import { PUBLIC_BASE_PATH } from '$env/static/public';
+    const basePath = PUBLIC_BASE_PATH || '';
+
   let pokemons: Pokemon[] = [];
   let owned: string[] = [];
 
