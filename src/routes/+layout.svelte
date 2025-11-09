@@ -32,19 +32,20 @@ const currentPath = $derived($page.url.pathname.replace(basePath, ''));
 </svelte:head>
 
 <style>
-    /* Reset et Base */
+/* Reset et Base */
     :global(body) {
         margin: 0;
         padding: 0;
-        background-color: #ecf0f1; /* Fond gris clair moderne */
+        background-color: #ecf0f1;
         font-family: 'Roboto', sans-serif;
         line-height: 1.6;
     }
 
     /* --- Boutons Ronds Améliorés (Global) --- */
-    .btn-round {
+    /* Les classes de boutons doivent être globales pour les composants enfants */
+    :global(.btn-round) {
         border-radius: 50px;
-        padding: 0.8em 1.8em; /* Plus grand pour le tactile */
+        padding: 0.8em 1.8em;
         font-size: 1.1rem;
         display: inline-flex;
         align-items: center;
@@ -53,90 +54,72 @@ const currentPath = $derived($page.url.pathname.replace(basePath, ''));
         cursor: pointer;
         font-weight: 700;
         transition: background-color 0.2s, transform 0.1s;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère pour effet 3D */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    .btn-round:hover {
+    :global(.btn-round:hover) {
         transform: translateY(-2px);
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     }
     
-    .btn-round:active {
+    :global(.btn-round:active) {
         transform: translateY(0);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     /* Couleurs Modernes */
-    .btn-oui {
-        background-color: #2ecc71; /* Vert Succès (Flat UI) */
+    :global(.btn-oui) {
+        background-color: #2ecc71;
         color: white;
         border: none;
     }
-    .btn-non {
-        background-color: #e74c3c; /* Rouge Alerte (Flat UI) */
+    :global(.btn-non) {
+        background-color: #e74c3c;
         color: white;
         border: none;
     }
-    .btn-inconnu {
-        background-color: #f1c40f; /* Jaune/Orange Avertissement */
+    :global(.btn-inconnu) {
+        background-color: #f1c40f;
         color: #333;
         border: none;
     }
-    .btn-reecouter, .btn-cancel {
-        background-color: #3498db; /* Bleu Primaire */
+    :global(.btn-reecouter), :global(.btn-cancel) {
+        background-color: #3498db;
         color: white;
         border: none;
     }
-    .btn-reset {
-        background-color: #95a5a6; /* Gris pour reset/neutre */
+    :global(.btn-reset) {
+        background-color: #95a5a6;
         color: white;
         border: none;
     }
 
-    /* Le reste du style original (si nécessaire) */
-    .color-square {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        width: 20px;
-        height: 20px;
-        border: 1px solid #000;
-        display: none;
-
- /* Reset et Base */
-:global(body) {
-margin: 0;
-padding: 0;
-background-color: #ecf0f1;
-font-family: 'Roboto', sans-serif;
-line-height: 1.6;
-}
-    
     /* Le conteneur principal doit avoir un padding équivalent à la hauteur de la nav bar */
-    /* La barre de navigation fait environ 56px de haut + padding */
     main {
-        padding-bottom: 72px; /* Assurez-vous que le contenu ne soit jamais caché */
-        min-height: 100vh; /* Pour s'assurer que le padding fonctionne même sur du contenu court */
+        padding-bottom: 72px; 
+        min-height: 100vh;
     }
 
-.bottom-nav {
-position: fixed;
- bottom: 0;
-left: 0;
- right: 0;
-display: flex;
- justify-content: space-around;
 
- background-color: #ffffff; /* Fond blanc pur Material */
- border-top: none; /* Retirer la bordure, l'ombre prend le relais */
-box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Ombre (Elevation Lvl 8) CLÉ de Material Design */
-height: 56px; /* Hauteur standard Material */
- padding: 8px 0; /* Padding vertical réduit pour centrer les éléments */
- z-index: 1000;
-}
+    /* --- Styles Material Bottom Navigation --- */
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        
+        background-color: #ffffff; 
+        border-top: none; 
+        box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); 
+        height: 56px; 
+        padding: 8px 0; 
+        z-index: 1000;
+    }
     
     .nav-item {
-        /* Élément de navigation unique */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -144,32 +127,30 @@ height: 56px; /* Hauteur standard Material */
         text-align: center;
         text-decoration: none;
         
-        color: #757575; /* Couleur neutre pour les icônes inactives (Material Gray 600) */
+        color: #757575; 
         flex: 1; 
-        min-width: 80px; /* Largeur minimale Material */
+        min-width: 80px; 
         
-        /* Augmenter la zone de clic pour les doigts */
         padding: 4px;
         margin: 0 4px; 
         
         transition: color 0.2s;
     }
 
- .nav-item .nav-icon {
-font-size: 18px; /* Taille standard des icônes */
-margin-bottom: 4px; /* Espacement entre icône et label */
- }
+    .nav-item .nav-icon {
+        font-size: 18px; 
+        margin-bottom: 4px; 
+    }
     
     .nav-item .nav-label {
-        font-size: 12px; /* Taille de police standard Material pour la nav bar */
+        font-size: 12px; 
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
-.nav-item.active {
- color: #3f51b5; /* Couleur primaire ou d'accentuation (Bleu Indigo Material) */
-}
+    .nav-item.active {
+        color: #3f51b5; 
     }
 </style>
 
