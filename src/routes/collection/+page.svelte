@@ -29,7 +29,7 @@ import { PUBLIC_BASE_PATH } from '$env/static/public';
         <img src={p.sprite} alt={p.name} class="pokemon-sprite" />
         <p class="pokemon-name">{p.name}</p>
         {#if owned.includes(p.name)}
-          <img src="/pokeball.png" alt="Pokéball" class="pokeball-overlay" />
+          <img src="${basePath}/pokeball.png" alt="Pokéball" class="pokeball-overlay" />
         {/if}
       </div>
     {/each}
