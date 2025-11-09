@@ -5,8 +5,7 @@ import { loadData } from '$lib/dataLoader';
 import { bestQuestionRandomized, speak} from '$lib/logic';
 import type { AskedQuestion, Pokemon, Question } from '$lib/logic';
 import 'knopf.css';
-import { PUBLIC_BASE_PATH } from '$env/static/public';
-    const basePath = PUBLIC_BASE_PATH || '';
+import { base } from '$app/paths';
 
   import { collection } from '$lib/stores/collection';
   import { fly } from 'svelte/transition';
@@ -167,7 +166,7 @@ async function nextQuestion() {
 
   {#if showPokeball}
   <div class="pokeball-animation" transition:fly={{ y: 200, duration: 1200 }}>
-    <img src="${basePath}/pokeball.png" alt="Pokéball" />
+    <img src="{base}/pokeball.png" alt="Pokéball" />
   </div>
 {/if}
 
